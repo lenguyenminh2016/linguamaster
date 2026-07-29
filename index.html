@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinguaMaster — Học Tiếng Anh & Tiếng Trung</title>
+  <meta name="description" content="Nền tảng học tiếng Anh và tiếng Trung toàn diện với AI Giáo Sư, nhận dạng giọng nói, từ điển Oxford/Cambridge và luyện 4 kỹ năng: Nghe, Nói, Đọc, Viết." />
+  <meta name="keywords" content="học tiếng anh, học tiếng trung, từ điển oxford, cambridge, AI giáo sư, luyện phát âm" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== PARTICLES BACKGROUND ========== -->
+  <div id="particles-bg" aria-hidden="true"></div>
+
+  <!-- ========== APP SHELL ========== -->
+  <div id="app" class="app-shell">
+
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <aside id="sidebar" class="sidebar" role="navigation" aria-label="Điều hướng chính">
+      <!-- Logo -->
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <span class="logo-en">A</span>
+          <span class="logo-zh">中</span>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">LinguaMaster</span>
+          <span class="logo-sub">AI Language Professor</span>
+        </div>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher">
+        <button id="btn-lang-en" class="lang-btn active" data-lang="en" aria-label="Học Tiếng Anh">
+          <img src="https://flagcdn.com/gb.svg" alt="English" class="flag-icon" />
+          <span>Tiếng Anh</span>
+        </button>
+        <button id="btn-lang-zh" class="lang-btn" data-lang="zh" aria-label="Học Tiếng Trung">
+          <img src="https://flagcdn.com/cn.svg" alt="中文" class="flag-icon" />
+          <span>Tiếng Trung</span>
+        </button>
+      </div>
+
+      <!-- Nav Menu -->
+      <nav class="nav-menu">
+        <button class="nav-item active" data-page="home" id="nav-home" aria-label="Trang chủ">
+          <i class="fas fa-home"></i>
+          <span>Trang Chủ</span>
+        </button>
+        <button class="nav-item" data-page="professor" id="nav-professor" aria-label="AI Giáo Sư">
+          <i class="fas fa-robot"></i>
+          <span>AI Giáo Sư</span>
+          <span class="nav-badge">AI</span>
+        </button>
+        <button class="nav-item" data-page="speaking" id="nav-speaking" aria-label="Luyện Nói">
+          <i class="fas fa-microphone"></i>
+          <span>Luyện Nói</span>
+        </button>
+        <button class="nav-item" data-page="listening" id="nav-listening" aria-label="Luyện Nghe">
+          <i class="fas fa-headphones"></i>
+          <span>Luyện Nghe</span>
+        </button>
+        <button class="nav-item" data-page="reading" id="nav-reading" aria-label="Luyện Đọc">
+          <i class="fas fa-book-open"></i>
+          <span>Luyện Đọc</span>
+        </button>
+        <button class="nav-item" data-page="writing" id="nav-writing" aria-label="Luyện Viết">
+          <i class="fas fa-pen-fancy"></i>
+          <span>Luyện Viết</span>
+        </button>
+        <button class="nav-item" data-page="dictionary" id="nav-dictionary" aria-label="Từ Điển">
+          <i class="fas fa-book"></i>
+          <span>Từ Điển</span>
+        </button>
+        <button class="nav-item" data-page="flashcard" id="nav-flashcard" aria-label="Flashcard">
+          <i class="fas fa-layer-group"></i>
+          <span>Flashcard</span>
+        </button>
+        <button class="nav-item" data-page="translate" id="nav-translate" aria-label="Phiên Dịch Live">
+          <i class="fas fa-language"></i>
+          <span>Phiên Dịch</span>
+          <span class="nav-badge live-badge">LIVE</span>
+        </button>
+        <button class="nav-item" data-page="progress" id="nav-progress" aria-label="Tiến Trình">
+          <i class="fas fa-chart-line"></i>
+          <span>Tiến Trình</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="user-level">
+          <div class="level-avatar">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="level-info">
+            <span class="level-name">Học Viên</span>
+            <div class="level-bar">
+              <div class="level-fill" id="sidebar-level-fill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== MOBILE TOP BAR ===== -->
+    <div class="mobile-topbar">
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <span class="mobile-logo">LinguaMaster</span>
+      <button id="mobile-lang-toggle" class="mobile-lang-btn" aria-label="Ngôn ngữ">
+        <img src="https://flagcdn.com/gb.svg" alt="Lang" class="flag-icon-sm" />
+      </button>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="main-content" class="main-content">
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: HOME                                 -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-home" class="page active" role="main">
+        <div class="page-header">
+          <h1>Chào mừng đến với <span class="gradient-text">LinguaMaster</span></h1>
+          <p class="page-subtitle">Giáo sư AI thông minh, sẵn sàng dạy bạn 24/7 — Nghe, Nói, Đọc, Viết</p>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-fire"></i></div>
+            <div class="stat-value" id="streak-count">0</div>
+            <div class="stat-label">Ngày liên tiếp</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-star"></i></div>
+            <div class="stat-value" id="total-xp">0</div>
+            <div class="stat-label">Điểm XP</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-brain"></i></div>
+            <div class="stat-value" id="words-learned">0</div>
+            <div class="stat-label">Từ đã học</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+            <div class="stat-value" id="accuracy-rate">—</div>
+            <div class="stat-label">Độ chính xác</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-title-row">
+          <h2>Bắt đầu ngay</h2>
+          <span class="section-badge">Chọn hoạt động</span>
+        </div>
+        <div class="quick-actions">
+          <div class="quick-card" data-page="professor" id="qc-professor">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-robot"></i></div>
+            <h3>AI Giáo Sư</h3>
+            <p>Nói chuyện, hỏi bài, sửa lỗi ngữ pháp và phát âm theo thời gian thực</p>
+            <span class="qc-tag">Phổ biến nhất</span>
+          </div>
+          <div class="quick-card" data-page="speaking" id="qc-speaking">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-microphone-lines"></i></div>
+            <h3>Luyện Nói</h3>
+            <p>Chấm điểm phát âm, so sánh với chuẩn Oxford & Bắc Kinh</p>
+            <span class="qc-tag">Ghi âm giọng nói</span>
+          </div>
+          <div class="quick-card" data-page="listening" id="qc-listening">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-headphones"></i></div>
+            <h3>Luyện Nghe</h3>
+            <p>Nghe audio chuẩn, điền khuyết, dictation từ cơ bản đến nâng cao</p>
+            <span class="qc-tag">Audio chuẩn</span>
+          </div>
+          <div class="quick-card" data-page="reading" id="qc-reading">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-book-open-reader"></i></div>
+            <h3>Luyện Đọc</h3>
+            <p>Click từ để tra nghĩa ngay, phân tích câu, bài đọc từ A1 đến C2</p>
+            <span class="qc-tag">Oxford Reader</span>
+          </div>
+          <div class="quick-card" data-page="writing" id="qc-writing">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-pen-fancy"></i></div>
+            <h3>Luyện Viết</h3>
+            <p>Sửa ngữ pháp tức thì, luyện viết IELTS, TOEIC, HSK theo chủ đề</p>
+            <span class="qc-tag">Grammar AI</span>
+          </div>
+          <div class="quick-card" data-page="dictionary" id="qc-dict">
+            <div class="qc-glow"></div>
+            <div class="qc-icon"><i class="fas fa-magnifying-glass"></i></div>
+            <h3>Từ Điển</h3>
+            <p>Oxford, Cambridge cho Anh; CC-CEDICT, Bắc Kinh chuẩn cho Trung</p>
+            <span class="qc-tag">Oxford & 北京</span>
+          </div>
+        </div>
+
+        <!-- Daily Word -->
+        <div class="daily-word-section">
+          <h2>Từ của ngày hôm nay</h2>
+          <div class="daily-word-card" id="daily-word-card">
+            <div class="dw-loading">
+              <div class="spinner"></div>
+              <span>Đang tải từ...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: AI PROFESSOR                         -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-professor" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-robot"></i> AI <span class="gradient-text">Giáo Sư</span></h1>
+          <p class="page-subtitle">Hỏi bất kỳ điều gì về ngôn ngữ — phát âm, ngữ pháp, từ vựng, văn hóa</p>
+        </div>
+
+        <div class="professor-layout">
+          <!-- Professor Avatar Panel -->
+          <div class="professor-panel">
+            <div class="avatar-container">
+              <div class="avatar-ring"></div>
+              <div class="avatar-core" id="avatar-core">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="avatar-status">
+                <span id="avatar-status-text">Sẵn sàng</span>
+                <div class="status-dot online" id="status-dot"></div>
+              </div>
+            </div>
+            <div class="professor-info">
+              <h3>Prof. LingAI</h3>
+              <p>Chuyên gia Ngôn ngữ học</p>
+              <div class="prof-skills">
+                <span class="skill-tag">Oxford</span>
+                <span class="skill-tag">Cambridge</span>
+                <span class="skill-tag">HSK</span>
+                <span class="skill-tag">IELTS</span>
+                <span class="skill-tag">TOEIC</span>
+                <span class="skill-tag">普通话</span>
+              </div>
+            </div>
+
+            <!-- Quick Prompts -->
+            <div class="quick-prompts">
+              <p class="qp-title">Gợi ý hỏi:</p>
+              <button class="qp-btn" data-prompt="What is the difference between 'since' and 'for' in English?">Since vs For?</button>
+              <button class="qp-btn" data-prompt="Explain the use of 了 (le) in Chinese grammar.">Cách dùng 了 trong tiếng Trung?</button>
+              <button class="qp-btn" data-prompt="How do I use the passive voice in English?">Câu bị động tiếng Anh?</button>
+              <button class="qp-btn" data-prompt="What is the difference between 的, 地, 得 in Chinese?">的 地 得 khác nhau thế nào?</button>
+              <button class="qp-btn" data-prompt="Teach me 5 advanced English vocabulary words for business.">Từ vựng tiếng Anh thương mại?</button>
+              <button class="qp-btn" data-prompt="Explain HSK 4 grammar patterns with examples.">HSK 4 ngữ pháp?</button>
+            </div>
+          </div>
+
+          <!-- Chat Area -->
+          <div class="chat-area">
+            <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+              <!-- Welcome message -->
+              <div class="message assistant-msg" id="welcome-msg">
+                <div class="msg-avatar"><i class="fas fa-robot"></i></div>
+                <div class="msg-bubble">
+                  <p>Xin chào! Tôi là <strong>Prof. LingAI</strong> — giáo sư ngôn ngữ AI của bạn. 👋</p>
+                  <p>Tôi có thể giúp bạn:</p>
+                  <ul>
+                    <li>🔤 Giải thích ngữ pháp tiếng Anh & tiếng Trung</li>
+                    <li>📢 Hướng dẫn phát âm chuẩn (IPA / Pinyin)</li>
+                    <li>📝 Sửa lỗi câu bạn viết</li>
+                    <li>📚 Dạy từ vựng theo chủ đề</li>
+                    <li>🗣️ Luyện hội thoại tự nhiên</li>
+                  </ul>
+                  <p>Bạn muốn bắt đầu từ đâu? Hãy gõ hoặc nói câu hỏi của bạn! 🎓</p>
+                  <span class="msg-time">Bây giờ</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-area">
+              <div class="grammar-check-toggle">
+                <label class="toggle-switch" for="grammar-toggle">
+                  <input type="checkbox" id="grammar-toggle" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+                <span>Tự động sửa ngữ pháp</span>
+              </div>
+              <div class="chat-input-row">
+                <button id="chat-voice-btn" class="icon-btn chat-voice" title="Nhấn để nói" aria-label="Ghi âm giọng nói">
+                  <i class="fas fa-microphone"></i>
+                </button>
+                <textarea id="chat-input" class="chat-textarea" placeholder="Gõ câu hỏi hoặc viết câu để sửa lỗi... (Enter để gửi)" rows="1" aria-label="Nhập tin nhắn"></textarea>
+                <button id="chat-send-btn" class="icon-btn chat-send" aria-label="Gửi tin nhắn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: SPEAKING                             -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-speaking" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-microphone"></i> Luyện <span class="gradient-text">Nói</span></h1>
+          <p class="page-subtitle">Nói câu mẫu và nhận điểm phát âm so với chuẩn Oxford / Bắc Kinh</p>
+        </div>
+
+        <div class="speaking-layout">
+          <!-- Level & Topic Select -->
+          <div class="control-panel glass-card">
+            <div class="control-row">
+              <div class="control-group">
+                <label for="speak-level">Cấp độ</label>
+                <select id="speak-level" class="select-input">
+                  <option value="A1">A1 — Sơ cấp</option>
+                  <option value="A2">A2 — Cơ bản</option>
+                  <option value="B1" selected>B1 — Trung cấp</option>
+                  <option value="B2">B2 — Trung cao</option>
+                  <option value="C1">C1 — Cao cấp</option>
+                  <option value="C2">C2 — Thành thạo</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="speak-topic">Chủ đề</label>
+                <select id="speak-topic" class="select-input">
+                  <option value="daily">Giao tiếp hàng ngày</option>
+                  <option value="business">Kinh doanh & Công sở</option>
+                  <option value="travel">Du lịch</option>
+                  <option value="academic">Học thuật</option>
+                  <option value="culture">Văn hóa & Nghệ thuật</option>
+                  <option value="food">Ẩm thực</option>
+                </select>
+              </div>
+              <button id="new-phrase-btn" class="btn-primary">
+                <i class="fas fa-shuffle"></i> Câu mới
+              </button>
+            </div>
+          </div>
+
+          <!-- Practice Card -->
+          <div class="speak-practice-card glass-card">
+            <!-- Target Phrase Display -->
+            <div class="phrase-display">
+              <div class="phrase-text" id="speak-phrase">
+                <p class="phrase-main" id="speak-phrase-main">Nhấn "Câu mới" để bắt đầu luyện tập</p>
+                <p class="phrase-pinyin" id="speak-phrase-sub"></p>
+                <p class="phrase-trans" id="speak-phrase-trans"></p>
+              </div>
+              <div class="phrase-ipa" id="speak-ipa"></div>
+            </div>
+
+            <!-- Listen Button -->
+            <div class="speak-controls">
+              <button id="listen-model-btn" class="btn-outline" title="Nghe phát âm chuẩn">
+                <i class="fas fa-volume-high"></i> Nghe mẫu
+              </button>
+              <button id="start-record-btn" class="btn-record" id="speak-record">
+                <div class="record-ring"></div>
+                <i class="fas fa-microphone"></i>
+                <span>Nhấn để ghi âm</span>
+              </button>
+              <button id="play-back-btn" class="btn-outline" disabled id="speak-playback">
+                <i class="fas fa-play"></i> Phát lại
+              </button>
+            </div>
+
+            <!-- Waveform Visualizer -->
+            <div class="waveform-container" id="waveform-container">
+              <canvas id="waveform-canvas" width="600" height="80" aria-label="Đồ thị sóng âm"></canvas>
+            </div>
+
+            <!-- Score Display -->
+            <div class="score-panel" id="score-panel" style="display:none">
+              <div class="score-circle">
+                <svg viewBox="0 0 100 100" class="score-svg">
+                  <circle cx="50" cy="50" r="45" class="score-bg-circle" />
+                  <circle cx="50" cy="50" r="45" class="score-fill-circle" id="score-circle-fill" />
+                </svg>
+                <div class="score-number" id="score-number">0</div>
+              </div>
+              <div class="score-details">
+                <div class="score-item">
+                  <span class="score-label">Phát âm</span>
+                  <div class="score-bar"><div class="score-bar-fill" id="score-pronunciation"></div></div>
+                </div>
+                <div class="score-item">
+                  <span class="score-label">Nhịp điệu</span>
+                  <div class="score-bar"><div class="score-bar-fill" id="score-rhythm"></div></div>
+                </div>
+                <div class="score-item">
+                  <span class="score-label">Trôi chảy</span>
+                  <div class="score-bar"><div class="score-bar-fill" id="score-fluency"></div></div>
+                </div>
+                <div class="score-feedback" id="score-feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: LISTENING                            -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-listening" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-headphones"></i> Luyện <span class="gradient-text">Nghe</span></h1>
+          <p class="page-subtitle">Nghe audio chuẩn, điền vào chỗ trống, dictation từ A1 đến C2</p>
+        </div>
+
+        <!-- Exercise Type Tabs -->
+        <div class="tab-row" role="tablist">
+          <button class="tab-btn active" data-tab="fill-blank" role="tab" aria-selected="true" id="tab-fill">Điền khuyết</button>
+          <button class="tab-btn" data-tab="dictation" role="tab" aria-selected="false" id="tab-dict">Nghe chép</button>
+          <button class="tab-btn" data-tab="mcq" role="tab" aria-selected="false" id="tab-mcq">Chọn đáp án</button>
+        </div>
+
+        <!-- Exercise Content -->
+        <div class="listen-exercise-area glass-card" id="listen-exercise-area">
+          <div class="listen-controls">
+            <button id="listen-play-btn" class="btn-play-big">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="listen-speed">
+              <label for="listen-speed-select">Tốc độ:</label>
+              <select id="listen-speed-select" class="select-small">
+                <option value="0.7">0.7x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.3">1.3x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+            </div>
+            <button id="listen-new-btn" class="btn-outline-sm">
+              <i class="fas fa-shuffle"></i> Bài mới
+            </button>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="audio-progress-bar">
+            <div class="audio-progress-fill" id="audio-progress-fill"></div>
+          </div>
+
+          <!-- Exercise content injected by JS -->
+          <div id="listen-content-area" class="listen-content">
+            <div class="listen-placeholder">
+              <i class="fas fa-headphones-simple"></i>
+              <p>Nhấn <strong>Bài mới</strong> để bắt đầu luyện nghe</p>
+            </div>
+          </div>
+
+          <div class="listen-actions" id="listen-actions" style="display:none">
+            <button id="listen-check-btn" class="btn-primary">
+              <i class="fas fa-check"></i> Kiểm tra
+            </button>
+            <button id="listen-hint-btn" class="btn-outline">
+              <i class="fas fa-lightbulb"></i> Gợi ý
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: READING                              -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-reading" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-book-open"></i> Luyện <span class="gradient-text">Đọc</span></h1>
+          <p class="page-subtitle">Click vào từ để tra nghĩa ngay — Bài đọc từ A1 đến C2</p>
+        </div>
+
+        <div class="reading-layout">
+          <!-- Sidebar Controls -->
+          <div class="reading-controls glass-card">
+            <div class="control-group">
+              <label for="read-level">Cấp độ</label>
+              <select id="read-level" class="select-input">
+                <option value="A1">A1 — Sơ cấp</option>
+                <option value="A2">A2 — Cơ bản</option>
+                <option value="B1" selected>B1 — Trung cấp</option>
+                <option value="B2">B2 — Trung cao</option>
+                <option value="C1">C1 — Cao cấp</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="read-topic">Chủ đề</label>
+              <select id="read-topic" class="select-input">
+                <option value="news">Tin tức thế giới</option>
+                <option value="science">Khoa học & Công nghệ</option>
+                <option value="culture">Văn hóa & Xã hội</option>
+                <option value="business">Kinh tế & Thương mại</option>
+                <option value="environment">Môi trường</option>
+                <option value="health">Sức khỏe</option>
+              </select>
+            </div>
+            <button id="read-new-btn" class="btn-primary full-width">
+              <i class="fas fa-file-lines"></i> Bài đọc mới
+            </button>
+            <button id="read-listen-btn" class="btn-outline full-width">
+              <i class="fas fa-volume-high"></i> Nghe toàn bài
+            </button>
+            <div class="font-size-control">
+              <label>Cỡ chữ</label>
+              <div class="font-size-btns">
+                <button class="fs-btn" data-size="small">A</button>
+                <button class="fs-btn active" data-size="medium">A</button>
+                <button class="fs-btn" data-size="large">A</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reading Content -->
+          <div class="reading-content-area">
+            <div class="reading-article glass-card" id="reading-article">
+              <div class="read-placeholder">
+                <i class="fas fa-book-open-reader"></i>
+                <p>Nhấn <strong>Bài đọc mới</strong> để bắt đầu</p>
+                <p class="hint">Click vào bất kỳ từ nào để tra nghĩa tức thì</p>
+              </div>
+            </div>
+
+            <!-- Questions Area -->
+            <div class="reading-questions glass-card" id="reading-questions" style="display:none">
+              <h3><i class="fas fa-question-circle"></i> Câu hỏi hiểu bài</h3>
+              <div id="questions-content"></div>
+              <button id="check-reading-btn" class="btn-primary">Kiểm tra đáp án</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Word Popup -->
+        <div id="word-popup" class="word-popup" style="display:none" role="tooltip">
+          <div class="wp-header">
+            <span class="wp-word" id="wp-word"></span>
+            <span class="wp-phonetic" id="wp-phonetic"></span>
+            <button class="wp-speak" id="wp-speak-btn" title="Nghe phát âm"><i class="fas fa-volume-high"></i></button>
+            <button class="wp-save" id="wp-save-btn" title="Lưu từ này"><i class="fas fa-bookmark"></i></button>
+            <button class="wp-close" id="wp-close-btn"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="wp-body" id="wp-body">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: WRITING                              -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-writing" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-pen-fancy"></i> Luyện <span class="gradient-text">Viết</span></h1>
+          <p class="page-subtitle">AI sửa lỗi ngữ pháp, chính tả và gợi ý cải thiện tức thì</p>
+        </div>
+
+        <div class="writing-layout">
+          <div class="writing-main">
+            <!-- Prompt -->
+            <div class="writing-prompt glass-card" id="writing-prompt-card">
+              <div class="wp-prompt-header">
+                <i class="fas fa-lightbulb"></i>
+                <span id="writing-topic-label">Chủ đề viết</span>
+                <button id="new-writing-prompt-btn" class="btn-xs">Đổi chủ đề</button>
+              </div>
+              <p id="writing-prompt-text" class="wp-text">Nhấn "Đổi chủ đề" để nhận đề bài viết mới</p>
+            </div>
+
+            <!-- Editor -->
+            <div class="writing-editor glass-card">
+              <div class="editor-toolbar">
+                <div class="editor-info">
+                  <span id="word-count">0 từ</span>
+                  <span id="char-count">0 ký tự</span>
+                </div>
+                <div class="editor-tools">
+                  <select id="write-lang-select" class="select-small">
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                  </select>
+                  <button id="check-grammar-btn" class="btn-primary-sm">
+                    <i class="fas fa-spell-check"></i> Kiểm tra
+                  </button>
+                  <button id="clear-editor-btn" class="btn-danger-sm">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div id="writing-editor" class="text-editor" contenteditable="true" spellcheck="false" 
+                   placeholder="Bắt đầu viết bài của bạn ở đây..." aria-label="Vùng soạn thảo">
+              </div>
+            </div>
+
+            <!-- Feedback Panel -->
+            <div class="feedback-panel glass-card" id="grammar-feedback" style="display:none">
+              <div class="feedback-header">
+                <i class="fas fa-robot"></i>
+                <h3>Nhận xét của Giáo Sư AI</h3>
+                <span class="feedback-score" id="writing-score">—</span>
+              </div>
+              <div id="feedback-content"></div>
+            </div>
+          </div>
+
+          <!-- Writing Sidebar -->
+          <div class="writing-sidebar">
+            <div class="glass-card">
+              <h3><i class="fas fa-graduation-cap"></i> Mục tiêu</h3>
+              <div class="control-group">
+                <label for="write-level">Cấp độ</label>
+                <select id="write-level" class="select-input">
+                  <option value="A1">A1</option>
+                  <option value="A2">A2</option>
+                  <option value="B1" selected>B1</option>
+                  <option value="B2">B2</option>
+                  <option value="C1">C1</option>
+                  <option value="IELTS">IELTS</option>
+                  <option value="TOEIC">TOEIC</option>
+                  <option value="HSK3">HSK 3</option>
+                  <option value="HSK4">HSK 4</option>
+                  <option value="HSK5">HSK 5</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="write-topic-select">Chủ đề</label>
+                <select id="write-topic-select" class="select-input">
+                  <option value="daily">Giao tiếp hàng ngày</option>
+                  <option value="environment">Môi trường</option>
+                  <option value="technology">Công nghệ</option>
+                  <option value="education">Giáo dục</option>
+                  <option value="health">Sức khỏe</option>
+                  <option value="travel">Du lịch</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grammar Rules Reference -->
+            <div class="glass-card">
+              <h3><i class="fas fa-list-check"></i> Lỗi thường gặp</h3>
+              <ul class="grammar-tips" id="grammar-tips-list">
+                <li><i class="fas fa-circle-xmark err"></i> Subject-verb agreement</li>
+                <li><i class="fas fa-circle-xmark err"></i> Article usage (a/an/the)</li>
+                <li><i class="fas fa-circle-xmark err"></i> Tense consistency</li>
+                <li><i class="fas fa-circle-xmark err"></i> Preposition errors</li>
+                <li><i class="fas fa-circle-xmark err"></i> Word order</li>
+              </ul>
+            </div>
+
+            <!-- Model Answer -->
+            <div class="glass-card" id="model-answer-card" style="display:none">
+              <h3><i class="fas fa-star"></i> Bài mẫu</h3>
+              <p id="model-answer-text" class="model-text"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: DICTIONARY                           -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-dictionary" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-book"></i> Từ <span class="gradient-text">Điển</span></h1>
+          <p class="page-subtitle">Oxford & Cambridge cho Tiếng Anh — CC-CEDICT & Bắc Kinh chuẩn cho Tiếng Trung</p>
+        </div>
+
+        <!-- Search Area -->
+        <div class="dict-search-wrap">
+          <div class="dict-search-box">
+            <button class="dict-lang-toggle" id="dict-lang-toggle" aria-label="Chuyển ngôn ngữ">
+              <img src="https://flagcdn.com/gb.svg" alt="EN" class="flag-icon-sm" id="dict-flag" />
+              <span id="dict-lang-label">EN</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <input type="text" id="dict-search-input" class="dict-search-input" 
+                   placeholder="Nhập từ tiếng Anh hoặc 中文..." aria-label="Tra từ điển" autocomplete="off" />
+            <button id="dict-search-btn" class="dict-search-button" aria-label="Tìm kiếm">
+              <i class="fas fa-search"></i>
+            </button>
+            <button id="dict-voice-btn" class="dict-voice-btn" aria-label="Tra từ bằng giọng nói">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+          <div class="dict-source-badges">
+            <span class="source-badge oxford">Oxford</span>
+            <span class="source-badge cambridge">Cambridge</span>
+            <span class="source-badge beijing">北京 CC-CEDICT</span>
+          </div>
+        </div>
+
+        <!-- Dictionary Result -->
+        <div id="dict-result" class="dict-result-area">
+          <div class="dict-placeholder">
+            <div class="dict-placeholder-icon">📖</div>
+            <p>Tra cứu từ bất kỳ trong tiếng Anh hoặc tiếng Trung</p>
+            <div class="dict-examples">
+              <button class="dict-example-btn" data-word="serendipity" data-lang="en">serendipity</button>
+              <button class="dict-example-btn" data-word="perseverance" data-lang="en">perseverance</button>
+              <button class="dict-example-btn" data-word="美丽" data-lang="zh">美丽</button>
+              <button class="dict-example-btn" data-word="努力" data-lang="zh">努力</button>
+              <button class="dict-example-btn" data-word="ephemeral" data-lang="en">ephemeral</button>
+              <button class="dict-example-btn" data-word="学习" data-lang="zh">学习</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: FLASHCARD                            -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-flashcard" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-layer-group"></i> Flash<span class="gradient-text">card</span></h1>
+          <p class="page-subtitle">Ôn tập thông minh với thuật toán Spaced Repetition (SM-2)</p>
+        </div>
+
+        <div class="flashcard-layout">
+          <!-- Stats row -->
+          <div class="fc-stats">
+            <div class="fc-stat"><span id="fc-new">0</span><label>Từ mới</label></div>
+            <div class="fc-stat"><span id="fc-review">0</span><label>Cần ôn</label></div>
+            <div class="fc-stat"><span id="fc-learned">0</span><label>Đã thuộc</label></div>
+          </div>
+
+          <!-- Flashcard Display -->
+          <div class="flashcard-stage" id="flashcard-stage">
+            <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-label="Thẻ từ vựng, click để lật">
+              <div class="flashcard-inner" id="flashcard-inner">
+                <div class="flashcard-front">
+                  <div class="fc-lang-badge" id="fc-lang-badge">EN</div>
+                  <div class="fc-word" id="fc-word">Bắt đầu ôn tập</div>
+                  <div class="fc-phonetic" id="fc-phonetic"></div>
+                  <div class="fc-hint">Click để xem nghĩa</div>
+                </div>
+                <div class="flashcard-back">
+                  <div class="fc-word-back" id="fc-word-back"></div>
+                  <div class="fc-meaning" id="fc-meaning">Chưa có từ nào trong thư viện</div>
+                  <div class="fc-example" id="fc-example"></div>
+                  <div class="fc-source" id="fc-source"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rating Buttons -->
+            <div class="fc-rating" id="fc-rating" style="display:none">
+              <button class="fc-rate-btn bad" data-rating="1" aria-label="Không nhớ">
+                <i class="fas fa-times"></i><span>Không nhớ</span>
+              </button>
+              <button class="fc-rate-btn hard" data-rating="2" aria-label="Khó">
+                <i class="fas fa-brain"></i><span>Khó</span>
+              </button>
+              <button class="fc-rate-btn good" data-rating="3" aria-label="Nhớ được">
+                <i class="fas fa-check"></i><span>Nhớ được</span>
+              </button>
+              <button class="fc-rate-btn easy" data-rating="4" aria-label="Dễ">
+                <i class="fas fa-star"></i><span>Dễ</span>
+              </button>
+            </div>
+
+            <!-- Empty State -->
+            <div class="fc-empty" id="fc-empty">
+              <i class="fas fa-check-circle"></i>
+              <p>Bạn đã ôn tập xong hôm nay! 🎉</p>
+              <p class="fc-empty-sub">Thêm từ mới bằng cách tra Từ Điển và lưu từ yêu thích</p>
+              <button class="btn-primary" data-page="dictionary">Tra thêm từ mới</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: TRANSLATE (LIVE)                     -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-translate" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-language"></i> Phiên Dịch <span class="gradient-text">Trực Tiếp</span></h1>
+          <p class="page-subtitle">Dịch real-time từ cuộc họp, video — Hội thoại 2 chiều — Dịch nhanh tức thì</p>
+        </div>
+
+        <!-- Sub-tab navigation -->
+        <div class="tab-row" role="tablist" style="margin-bottom:28px">
+          <button class="tab-btn trans-tab-btn active" data-trans-tab="meeting" role="tab" aria-selected="true">🎥 Cuộc Họp / Video</button>
+          <button class="tab-btn trans-tab-btn" data-trans-tab="convo" role="tab" aria-selected="false">🗣️ Hội Thoại</button>
+          <button class="tab-btn trans-tab-btn" data-trans-tab="quick" role="tab" aria-selected="false">⚡ Dịch Nhanh</button>
+        </div>
+
+        <!-- ═══ PANEL: MEETING / VIDEO ═══ -->
+        <div id="trans-panel-meeting" class="trans-panel active">
+          <!-- Controls bar -->
+          <div class="glass-card meeting-controls-bar">
+            <div class="meeting-lang-row">
+              <div class="control-group">
+                <label>Ngôn ngữ nguồn</label>
+                <select id="meeting-src-lang" class="select-input"></select>
+              </div>
+              <button id="meeting-swap-btn" class="swap-lang-btn" title="Đổi ngôn ngữ">
+                <i class="fas fa-arrows-left-right"></i>
+              </button>
+              <div class="control-group">
+                <label>Dịch sang</label>
+                <select id="meeting-tgt-lang" class="select-input"></select>
+              </div>
+            </div>
+
+            <!-- Source selector -->
+            <div class="meeting-source-tabs">
+              <button class="meeting-src-btn active" id="meeting-tab-mic">
+                <i class="fas fa-microphone"></i> Microphone
+              </button>
+              <button class="meeting-src-btn" id="meeting-tab-tab">
+                <i class="fas fa-display"></i> Tab / Video Audio
+              </button>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="meeting-action-row">
+              <div class="meeting-live-indicator">
+                <div class="live-dot" id="meeting-live-dot"></div>
+                <span id="meeting-status-text">Sẵn sàng</span>
+              </div>
+              <button id="meeting-start-btn" class="btn-primary meeting-start">
+                <i class="fas fa-circle-dot"></i> Bắt đầu dịch
+              </button>
+              <button id="meeting-stop-btn" class="btn-danger-full meeting-stop" style="display:none">
+                <i class="fas fa-stop"></i> Dừng
+              </button>
+              <button id="meeting-clear-btn" class="btn-outline">
+                <i class="fas fa-eraser"></i> Xóa
+              </button>
+              <button id="meeting-export-btn" class="btn-outline">
+                <i class="fas fa-file-export"></i> Xuất file
+              </button>
+            </div>
+          </div>
+
+          <!-- Subtitle Display Area -->
+          <div class="glass-card subtitle-display" id="meeting-subtitles">
+            <div class="subtitle-placeholder">
+              <i class="fas fa-closed-captioning"></i>
+              <p>Phụ đề sẽ hiển thị ở đây khi bắt đầu dịch...</p>
+              <p class="hint">Hỗ trợ: họp online, YouTube, phim, podcast, hội thoại trực tiếp</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ PANEL: CONVERSATION ═══ -->
+        <div id="trans-panel-convo" class="trans-panel">
+          <div class="convo-header glass-card">
+            <div class="convo-person-config" id="convo-person-a-config">
+              <span class="convo-person-label person-a-label">Người A</span>
+              <select id="convo-lang-a" class="select-input"></select>
+            </div>
+            <div class="convo-center-controls">
+              <button id="convo-auto-btn" class="btn-outline convo-auto">
+                <i class="fas fa-wand-magic-sparkles"></i> Tự động
+              </button>
+              <button id="convo-swap-btn" class="swap-lang-btn">
+                <i class="fas fa-arrows-left-right"></i>
+              </button>
+              <label class="toggle-switch" for="convo-auto-speak" style="display:inline-flex;align-items:center;gap:6px">
+                <input type="checkbox" id="convo-auto-speak" checked />
+                <span class="toggle-slider"></span>
+                <span style="font-size:12px;color:var(--text-secondary)">Tự đọc</span>
+              </label>
+            </div>
+            <div class="convo-person-config" id="convo-person-b-config">
+              <select id="convo-lang-b" class="select-input"></select>
+              <span class="convo-person-label person-b-label">Người B</span>
+            </div>
+          </div>
+
+          <!-- History area -->
+          <div class="glass-card convo-history" id="convo-history">
+            <div class="convo-placeholder">
+              <i class="fas fa-comments"></i>
+              <p>Nhấn vào nút mic của mỗi người để bắt đầu hội thoại</p>
+            </div>
+          </div>
+
+          <!-- Mic buttons -->
+          <div class="convo-mic-row">
+            <div class="convo-mic-panel person-a-panel">
+              <div class="convo-interim" id="convo-interim-a"></div>
+              <button id="convo-btn-a" class="convo-mic-btn person-a-btn" aria-label="Người A nói">
+                <i class="fas fa-microphone"></i>
+              </button>
+              <span id="convo-status-a" class="convo-status">Nhấn để nói</span>
+            </div>
+
+            <div class="convo-mic-panel person-b-panel">
+              <div class="convo-interim" id="convo-interim-b"></div>
+              <button id="convo-btn-b" class="convo-mic-btn person-b-btn" aria-label="Người B nói">
+                <i class="fas fa-microphone"></i>
+              </button>
+              <span id="convo-status-b" class="convo-status">Nhấn để nói</span>
+            </div>
+          </div>
+
+          <div style="text-align:center;margin-top:8px">
+            <button id="convo-clear-btn" class="btn-outline-sm">
+              <i class="fas fa-eraser"></i> Xóa lịch sử
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══ PANEL: QUICK TRANSLATE ═══ -->
+        <div id="trans-panel-quick" class="trans-panel">
+          <div class="quick-translate-layout">
+            <!-- Left: Input -->
+            <div class="glass-card quick-input-card">
+              <div class="quick-card-header">
+                <select id="quick-src-lang" class="select-input quick-lang-select"></select>
+                <div class="quick-header-tools">
+                  <button id="quick-voice-in" class="icon-btn chat-voice" title="Nói để nhập">
+                    <i class="fas fa-microphone"></i>
+                  </button>
+                  <button id="quick-clear-btn" class="icon-btn" style="background:transparent;border:1px solid var(--glass-border);color:var(--text-secondary)" title="Xóa">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <textarea id="quick-input" class="quick-textarea" placeholder="Nhập văn bản cần dịch... (Ctrl+Enter để dịch)" rows="8"></textarea>
+              <div class="quick-footer">
+                <span id="quick-char-count" class="char-count">0 ký tự</span>
+                <button id="quick-translate-btn" class="btn-primary">
+                  <i class="fas fa-language"></i> Dịch ngay
+                </button>
+              </div>
+            </div>
+
+            <!-- Swap center -->
+            <div class="quick-swap-col">
+              <button id="quick-swap-btn" class="swap-lang-btn swap-vertical" title="Đổi ngôn ngữ">
+                <i class="fas fa-arrows-left-right"></i>
+              </button>
+            </div>
+
+            <!-- Right: Output -->
+            <div class="glass-card quick-output-card">
+              <div class="quick-card-header">
+                <select id="quick-tgt-lang" class="select-input quick-lang-select"></select>
+                <div class="quick-header-tools">
+                  <button id="quick-speak-out" class="icon-btn chat-voice" title="Nghe phát âm">
+                    <i class="fas fa-volume-high"></i>
+                  </button>
+                  <button id="quick-copy-out" class="icon-btn" style="background:transparent;border:1px solid var(--glass-border);color:var(--text-secondary)" title="Sao chép">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+              <div id="quick-output" class="quick-output-area">
+                <span style="color:var(--text-muted)">Bản dịch sẽ hiển thị ở đây...</span>
+              </div>
+              <div class="quick-footer">
+                <span style="font-size:11px;color:var(--text-muted)">Powered by MyMemory API</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick history chips -->
+          <div class="quick-history" id="quick-history"></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- PAGE: PROGRESS                             -->
+      <!-- ══════════════════════════════════════════ -->
+      <section id="page-progress" class="page" role="main">
+        <div class="page-header">
+          <h1><i class="fas fa-chart-line"></i> Tiến <span class="gradient-text">Trình</span></h1>
+          <p class="page-subtitle">Theo dõi hành trình học ngôn ngữ của bạn</p>
+        </div>
+
+        <!-- Overall Progress -->
+        <div class="progress-overview">
+          <div class="progress-card glass-card">
+            <h3>Tiếng Anh</h3>
+            <div class="circular-progress" id="en-progress-circle">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="cp-bg" />
+                <circle cx="50" cy="50" r="40" class="cp-fill" id="en-cp-fill" style="stroke-dashoffset: 251.2" />
+              </svg>
+              <span id="en-progress-text">0%</span>
+            </div>
+            <div class="prog-level" id="en-level-label">Beginner</div>
+          </div>
+          <div class="progress-card glass-card">
+            <h3>Tiếng Trung</h3>
+            <div class="circular-progress" id="zh-progress-circle">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="cp-bg" />
+                <circle cx="50" cy="50" r="40" class="cp-fill" id="zh-cp-fill" style="stroke-dashoffset: 251.2" />
+              </svg>
+              <span id="zh-progress-text">0%</span>
+            </div>
+            <div class="prog-level" id="zh-level-label">HSK 1</div>
+          </div>
+        </div>
+
+        <!-- Activity Calendar (last 30 days) -->
+        <div class="glass-card">
+          <h3><i class="fas fa-calendar-days"></i> Hoạt động 30 ngày qua</h3>
+          <div class="activity-calendar" id="activity-calendar"></div>
+        </div>
+
+        <!-- Skills Radar -->
+        <div class="glass-card">
+          <h3><i class="fas fa-chart-radar"></i> Điểm mạnh theo kỹ năng</h3>
+          <div class="skills-chart">
+            <canvas id="skills-radar" width="300" height="300" aria-label="Biểu đồ kỹ năng"></canvas>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="glass-card">
+          <h3><i class="fas fa-medal"></i> Thành tích</h3>
+          <div class="achievements-grid" id="achievements-grid"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========== TOAST NOTIFICATION ========== -->
+  <div id="toast-container" class="toast-container" aria-live="assertive"></div>
+
+  <!-- ========== JS MODULES ========== -->
+  <script src="js/progress.js"></script>
+  <script src="js/dictionary.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/translator.js"></script>
+  <script src="js/exercises.js"></script>
+  <script src="js/ai-tutor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

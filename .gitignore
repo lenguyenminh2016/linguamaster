@@ -1,0 +1,19 @@
+# Environment & Secrets
+.env
+*.env.local
+*.env.production
+
+# Test & Dev files
+test-gemini-api.ps1
+test-gemini.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
