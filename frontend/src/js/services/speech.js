@@ -1,5 +1,5 @@
 /**
- * speech.js — Web Speech API Module
+ * speech.js — Frontend Web Speech Service
  * Handles: Speech Recognition (STT) and Speech Synthesis (TTS)
  */
 

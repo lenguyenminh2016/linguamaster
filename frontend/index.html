@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
@@ -107,7 +107,7 @@
           <div class="level-info">
             <span class="level-name">Học Viên</span>
             <div class="level-bar">
-              <div class="level-fill" id="sidebar-level-fill" style="width:0%"></div>
+              <div class="level-fill initial-width-zero" id="sidebar-level-fill"></div>
             </div>
           </div>
         </div>
@@ -296,7 +296,7 @@
             <div class="chat-input-area">
               <div class="grammar-check-toggle">
                 <label class="toggle-switch" for="grammar-toggle">
-                  <input type="checkbox" id="grammar-toggle" checked />
+                  <input type="checkbox" id="grammar-toggle" aria-label="Tự động sửa ngữ pháp" checked />
                   <span class="toggle-slider"></span>
                 </label>
                 <span>Tự động sửa ngữ pháp</span>
@@ -373,12 +373,12 @@
               <button id="listen-model-btn" class="btn-outline" title="Nghe phát âm chuẩn">
                 <i class="fas fa-volume-high"></i> Nghe mẫu
               </button>
-              <button id="start-record-btn" class="btn-record" id="speak-record">
+              <button id="start-record-btn" class="btn-record">
                 <div class="record-ring"></div>
                 <i class="fas fa-microphone"></i>
                 <span>Nhấn để ghi âm</span>
               </button>
-              <button id="play-back-btn" class="btn-outline" disabled id="speak-playback">
+              <button id="play-back-btn" class="btn-outline" disabled>
                 <i class="fas fa-play"></i> Phát lại
               </button>
             </div>
@@ -389,7 +389,7 @@
             </div>
 
             <!-- Score Display -->
-            <div class="score-panel" id="score-panel" style="display:none">
+            <div class="score-panel initially-hidden" id="score-panel">
               <div class="score-circle">
                 <svg viewBox="0 0 100 100" class="score-svg">
                   <circle cx="50" cy="50" r="45" class="score-bg-circle" />
@@ -436,7 +436,7 @@
         <!-- Exercise Content -->
         <div class="listen-exercise-area glass-card" id="listen-exercise-area">
           <div class="listen-controls">
-            <button id="listen-play-btn" class="btn-play-big">
+            <button id="listen-play-btn" class="btn-play-big" aria-label="Phát bài luyện nghe">
               <i class="fas fa-play"></i>
             </button>
             <div class="listen-speed">
@@ -466,7 +466,7 @@
             </div>
           </div>
 
-          <div class="listen-actions" id="listen-actions" style="display:none">
+          <div class="listen-actions initially-hidden" id="listen-actions">
             <button id="listen-check-btn" class="btn-primary">
               <i class="fas fa-check"></i> Kiểm tra
             </button>
@@ -519,9 +519,9 @@
             <div class="font-size-control">
               <label>Cỡ chữ</label>
               <div class="font-size-btns">
-                <button class="fs-btn" data-size="small">A</button>
-                <button class="fs-btn active" data-size="medium">A</button>
-                <button class="fs-btn" data-size="large">A</button>
+                <button class="fs-btn" data-size="small" aria-label="Cỡ chữ nhỏ">A</button>
+                <button class="fs-btn active" data-size="medium" aria-label="Cỡ chữ vừa">A</button>
+                <button class="fs-btn" data-size="large" aria-label="Cỡ chữ lớn">A</button>
               </div>
             </div>
           </div>
@@ -537,7 +537,7 @@
             </div>
 
             <!-- Questions Area -->
-            <div class="reading-questions glass-card" id="reading-questions" style="display:none">
+            <div class="reading-questions glass-card initially-hidden" id="reading-questions">
               <h3><i class="fas fa-question-circle"></i> Câu hỏi hiểu bài</h3>
               <div id="questions-content"></div>
               <button id="check-reading-btn" class="btn-primary">Kiểm tra đáp án</button>
@@ -546,13 +546,13 @@
         </div>
 
         <!-- Word Popup -->
-        <div id="word-popup" class="word-popup" style="display:none" role="tooltip">
+        <div id="word-popup" class="word-popup initially-hidden" role="tooltip">
           <div class="wp-header">
             <span class="wp-word" id="wp-word"></span>
             <span class="wp-phonetic" id="wp-phonetic"></span>
-            <button class="wp-speak" id="wp-speak-btn" title="Nghe phát âm"><i class="fas fa-volume-high"></i></button>
-            <button class="wp-save" id="wp-save-btn" title="Lưu từ này"><i class="fas fa-bookmark"></i></button>
-            <button class="wp-close" id="wp-close-btn"><i class="fas fa-times"></i></button>
+            <button class="wp-speak" id="wp-speak-btn" title="Nghe phát âm" aria-label="Nghe phát âm"><i class="fas fa-volume-high"></i></button>
+            <button class="wp-save" id="wp-save-btn" title="Lưu từ này" aria-label="Lưu từ này"><i class="fas fa-bookmark"></i></button>
+            <button class="wp-close" id="wp-close-btn" aria-label="Đóng tra từ"><i class="fas fa-times"></i></button>
           </div>
           <div class="wp-body" id="wp-body">
             <div class="spinner"></div>
@@ -589,14 +589,14 @@
                   <span id="char-count">0 ký tự</span>
                 </div>
                 <div class="editor-tools">
-                  <select id="write-lang-select" class="select-small">
+                  <select id="write-lang-select" class="select-small" aria-label="Ngôn ngữ bài viết">
                     <option value="en">English</option>
                     <option value="zh">中文</option>
                   </select>
                   <button id="check-grammar-btn" class="btn-primary-sm">
                     <i class="fas fa-spell-check"></i> Kiểm tra
                   </button>
-                  <button id="clear-editor-btn" class="btn-danger-sm">
+                  <button id="clear-editor-btn" class="btn-danger-sm" aria-label="Xóa nội dung bài viết">
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
@@ -607,7 +607,7 @@
             </div>
 
             <!-- Feedback Panel -->
-            <div class="feedback-panel glass-card" id="grammar-feedback" style="display:none">
+            <div class="feedback-panel glass-card initially-hidden" id="grammar-feedback">
               <div class="feedback-header">
                 <i class="fas fa-robot"></i>
                 <h3>Nhận xét của Giáo Sư AI</h3>
@@ -662,7 +662,7 @@
             </div>
 
             <!-- Model Answer -->
-            <div class="glass-card" id="model-answer-card" style="display:none">
+            <div class="glass-card initially-hidden" id="model-answer-card">
               <h3><i class="fas fa-star"></i> Bài mẫu</h3>
               <p id="model-answer-text" class="model-text"></p>
             </div>
@@ -757,7 +757,7 @@
             </div>
 
             <!-- Rating Buttons -->
-            <div class="fc-rating" id="fc-rating" style="display:none">
+            <div class="fc-rating initially-hidden" id="fc-rating">
               <button class="fc-rate-btn bad" data-rating="1" aria-label="Không nhớ">
                 <i class="fas fa-times"></i><span>Không nhớ</span>
               </button>
@@ -793,7 +793,7 @@
         </div>
 
         <!-- Sub-tab navigation -->
-        <div class="tab-row" role="tablist" style="margin-bottom:28px">
+        <div class="tab-row translation-tabs" role="tablist">
           <button class="tab-btn trans-tab-btn active" data-trans-tab="meeting" role="tab" aria-selected="true">🎥 Cuộc Họp / Video</button>
           <button class="tab-btn trans-tab-btn" data-trans-tab="convo" role="tab" aria-selected="false">🗣️ Hội Thoại</button>
           <button class="tab-btn trans-tab-btn" data-trans-tab="quick" role="tab" aria-selected="false">⚡ Dịch Nhanh</button>
@@ -805,14 +805,14 @@
           <div class="glass-card meeting-controls-bar">
             <div class="meeting-lang-row">
               <div class="control-group">
-                <label>Ngôn ngữ nguồn</label>
+                <label for="meeting-src-lang">Ngôn ngữ nguồn</label>
                 <select id="meeting-src-lang" class="select-input"></select>
               </div>
               <button id="meeting-swap-btn" class="swap-lang-btn" title="Đổi ngôn ngữ">
                 <i class="fas fa-arrows-left-right"></i>
               </button>
               <div class="control-group">
-                <label>Dịch sang</label>
+                <label for="meeting-tgt-lang">Dịch sang</label>
                 <select id="meeting-tgt-lang" class="select-input"></select>
               </div>
             </div>
@@ -836,7 +836,7 @@
               <button id="meeting-start-btn" class="btn-primary meeting-start">
                 <i class="fas fa-circle-dot"></i> Bắt đầu dịch
               </button>
-              <button id="meeting-stop-btn" class="btn-danger-full meeting-stop" style="display:none">
+              <button id="meeting-stop-btn" class="btn-danger-full meeting-stop initially-hidden">
                 <i class="fas fa-stop"></i> Dừng
               </button>
               <button id="meeting-clear-btn" class="btn-outline">
@@ -863,23 +863,23 @@
           <div class="convo-header glass-card">
             <div class="convo-person-config" id="convo-person-a-config">
               <span class="convo-person-label person-a-label">Người A</span>
-              <select id="convo-lang-a" class="select-input"></select>
+              <select id="convo-lang-a" class="select-input" aria-label="Ngôn ngữ của người A"></select>
             </div>
             <div class="convo-center-controls">
               <button id="convo-auto-btn" class="btn-outline convo-auto">
                 <i class="fas fa-wand-magic-sparkles"></i> Tự động
               </button>
-              <button id="convo-swap-btn" class="swap-lang-btn">
+              <button id="convo-swap-btn" class="swap-lang-btn" aria-label="Đổi ngôn ngữ hội thoại">
                 <i class="fas fa-arrows-left-right"></i>
               </button>
-              <label class="toggle-switch" for="convo-auto-speak" style="display:inline-flex;align-items:center;gap:6px">
+              <label class="toggle-switch convo-auto-speak" for="convo-auto-speak">
                 <input type="checkbox" id="convo-auto-speak" checked />
                 <span class="toggle-slider"></span>
-                <span style="font-size:12px;color:var(--text-secondary)">Tự đọc</span>
+                <span class="convo-auto-speak-label">Tự đọc</span>
               </label>
             </div>
             <div class="convo-person-config" id="convo-person-b-config">
-              <select id="convo-lang-b" class="select-input"></select>
+              <select id="convo-lang-b" class="select-input" aria-label="Ngôn ngữ của người B"></select>
               <span class="convo-person-label person-b-label">Người B</span>
             </div>
           </div>
@@ -911,7 +911,7 @@
             </div>
           </div>
 
-          <div style="text-align:center;margin-top:8px">
+          <div class="convo-clear-actions">
             <button id="convo-clear-btn" class="btn-outline-sm">
               <i class="fas fa-eraser"></i> Xóa lịch sử
             </button>
@@ -924,17 +924,17 @@
             <!-- Left: Input -->
             <div class="glass-card quick-input-card">
               <div class="quick-card-header">
-                <select id="quick-src-lang" class="select-input quick-lang-select"></select>
+                <select id="quick-src-lang" class="select-input quick-lang-select" aria-label="Ngôn ngữ nguồn để dịch nhanh"></select>
                 <div class="quick-header-tools">
-                  <button id="quick-voice-in" class="icon-btn chat-voice" title="Nói để nhập">
+                  <button id="quick-voice-in" class="icon-btn chat-voice" title="Nói để nhập" aria-label="Nói để nhập văn bản">
                     <i class="fas fa-microphone"></i>
                   </button>
-                  <button id="quick-clear-btn" class="icon-btn" style="background:transparent;border:1px solid var(--glass-border);color:var(--text-secondary)" title="Xóa">
+                  <button id="quick-clear-btn" class="icon-btn icon-btn-subtle" title="Xóa" aria-label="Xóa văn bản nguồn">
                     <i class="fas fa-times"></i>
                   </button>
                 </div>
               </div>
-              <textarea id="quick-input" class="quick-textarea" placeholder="Nhập văn bản cần dịch... (Ctrl+Enter để dịch)" rows="8"></textarea>
+              <textarea id="quick-input" class="quick-textarea" placeholder="Nhập văn bản cần dịch... (Ctrl+Enter để dịch)" rows="8" aria-label="Văn bản cần dịch"></textarea>
               <div class="quick-footer">
                 <span id="quick-char-count" class="char-count">0 ký tự</span>
                 <button id="quick-translate-btn" class="btn-primary">
@@ -945,7 +945,7 @@
 
             <!-- Swap center -->
             <div class="quick-swap-col">
-              <button id="quick-swap-btn" class="swap-lang-btn swap-vertical" title="Đổi ngôn ngữ">
+              <button id="quick-swap-btn" class="swap-lang-btn swap-vertical" title="Đổi ngôn ngữ" aria-label="Đổi ngôn ngữ dịch nhanh">
                 <i class="fas fa-arrows-left-right"></i>
               </button>
             </div>
@@ -953,21 +953,21 @@
             <!-- Right: Output -->
             <div class="glass-card quick-output-card">
               <div class="quick-card-header">
-                <select id="quick-tgt-lang" class="select-input quick-lang-select"></select>
+                <select id="quick-tgt-lang" class="select-input quick-lang-select" aria-label="Ngôn ngữ đích của bản dịch"></select>
                 <div class="quick-header-tools">
-                  <button id="quick-speak-out" class="icon-btn chat-voice" title="Nghe phát âm">
+                  <button id="quick-speak-out" class="icon-btn chat-voice" title="Nghe phát âm" aria-label="Nghe bản dịch">
                     <i class="fas fa-volume-high"></i>
                   </button>
-                  <button id="quick-copy-out" class="icon-btn" style="background:transparent;border:1px solid var(--glass-border);color:var(--text-secondary)" title="Sao chép">
+                  <button id="quick-copy-out" class="icon-btn icon-btn-subtle" title="Sao chép" aria-label="Sao chép bản dịch">
                     <i class="fas fa-copy"></i>
                   </button>
                 </div>
               </div>
               <div id="quick-output" class="quick-output-area">
-                <span style="color:var(--text-muted)">Bản dịch sẽ hiển thị ở đây...</span>
+                <span class="quick-output-placeholder">Bản dịch sẽ hiển thị ở đây...</span>
               </div>
               <div class="quick-footer">
-                <span style="font-size:11px;color:var(--text-muted)">Powered by MyMemory API</span>
+                <span class="service-attribution">Powered by MyMemory API</span>
               </div>
             </div>
           </div>
@@ -993,7 +993,7 @@
             <div class="circular-progress" id="en-progress-circle">
               <svg viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" class="cp-bg" />
-                <circle cx="50" cy="50" r="40" class="cp-fill" id="en-cp-fill" style="stroke-dashoffset: 251.2" />
+                <circle cx="50" cy="50" r="40" class="cp-fill cp-fill-initial" id="en-cp-fill" />
               </svg>
               <span id="en-progress-text">0%</span>
             </div>
@@ -1004,7 +1004,7 @@
             <div class="circular-progress" id="zh-progress-circle">
               <svg viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" class="cp-bg" />
-                <circle cx="50" cy="50" r="40" class="cp-fill" id="zh-cp-fill" style="stroke-dashoffset: 251.2" />
+                <circle cx="50" cy="50" r="40" class="cp-fill cp-fill-initial" id="zh-cp-fill" />
               </svg>
               <span id="zh-progress-text">0%</span>
             </div>
@@ -1040,12 +1040,12 @@
   <div id="toast-container" class="toast-container" aria-live="assertive"></div>
 
   <!-- ========== JS MODULES ========== -->
-  <script src="js/progress.js"></script>
-  <script src="js/dictionary.js"></script>
-  <script src="js/speech.js"></script>
-  <script src="js/translator.js"></script>
-  <script src="js/exercises.js"></script>
-  <script src="js/ai-tutor.js"></script>
-  <script src="js/app.js"></script>
+  <script src="src/js/features/progress.js"></script>
+  <script src="src/js/services/dictionary.js"></script>
+  <script src="src/js/services/speech.js"></script>
+  <script src="src/js/services/translator.js"></script>
+  <script src="src/js/features/exercises.js"></script>
+  <script src="src/js/features/ai-tutor.js"></script>
+  <script src="src/js/core/app.js"></script>
 </body>
 </html>

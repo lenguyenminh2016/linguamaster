@@ -1,5 +1,5 @@
 /**
- * progress.js — User Progress & Gamification
+ * progress.js — Frontend User Progress & Gamification
  * Handles XP, streaks, word counts, achievements, and localStorage
  */
 

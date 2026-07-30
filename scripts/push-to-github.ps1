@@ -1,9 +1,9 @@
 # push-to-github.ps1
 # Script to initialize git and push to GitHub
 
-$GIT = "e:\Antigarvity\PortableGit\bin\git.exe"
+$gitCommand = Get-Command git -ErrorAction SilentlyContinue
 $REPO_URL = "https://github.com/lenguyenminh2016/linguamaster.git"
-$PROJECT = "e:\Antigarvity\linguamaster"
+$PROJECT = Split-Path -Parent $PSScriptRoot
 
 Set-Location $PROJECT
 
@@ -12,13 +12,11 @@ Write-Host "=== LinguaMaster — Push to GitHub ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Check git
-if (-not (Test-Path $GIT)) {
-    Write-Host "ERROR: Portable Git not found at $GIT" -ForegroundColor Red
+if (-not $gitCommand) {
+    Write-Host "ERROR: Git was not found in PATH." -ForegroundColor Red
     exit 1
 }
-
-# Set PATH for this session
-$env:PATH = "e:\Antigarvity\PortableGit\bin;e:\Antigarvity\PortableGit\usr\bin;" + $env:PATH
+$GIT = $gitCommand.Source
 
 # Init repo if needed
 if (-not (Test-Path ".git")) {
@@ -28,10 +26,6 @@ if (-not (Test-Path ".git")) {
 } else {
     Write-Host "Git repo already initialized." -ForegroundColor Green
 }
-
-# Config user
-& $GIT config user.email "lenguyenminh2016@gmail.com"
-& $GIT config user.name "Le Nguyen Minh"
 
 # Set remote
 $existingRemote = & $GIT remote 2>$null
@@ -62,7 +56,7 @@ $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 Write-Host ""
 Write-Host "Pushing to GitHub..." -ForegroundColor Yellow
 Write-Host "(You may be prompted for GitHub credentials)" -ForegroundColor Gray
-& $GIT push -u origin main --force
+& $GIT push -u origin main
 
 Write-Host ""
 Write-Host "Done! View at: https://github.com/lenguyenminh2016/linguamaster" -ForegroundColor Green

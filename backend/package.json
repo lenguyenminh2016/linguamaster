@@ -1,0 +1,16 @@
+{
+  "name": "linguamaster-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend and development server for LinguaMaster.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/services/gemini.service.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

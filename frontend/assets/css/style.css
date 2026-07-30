@@ -1,5 +1,5 @@
 /* ================================================
-   LinguaMaster — CSS Design System
+   LinguaMaster — Frontend CSS Design System
    Dark Mode + Glassmorphism + Animations
    ================================================ */
 
@@ -907,6 +907,75 @@ body {
   color: var(--accent-green);
   font-weight: 700;
   margin-bottom: 4px;
+}
+
+.message-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.message-speak-button {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.message-speak-button:hover {
+  color: var(--accent-primary);
+}
+
+.md-heading-2 {
+  margin: 10px 0 6px;
+  color: var(--text-accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.md-heading-3 {
+  margin: 8px 0 4px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.md-strong {
+  color: var(--text-accent);
+}
+
+.md-code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(124,58,237,0.2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.md-blockquote {
+  margin: 6px 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--accent-primary);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.md-table-row {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.md-list {
+  margin: 8px 0;
+  padding-left: 16px;
+}
+
+.md-list-item {
+  margin: 3px 0;
+  padding-left: 4px;
 }
 
 /* Typing indicator */
@@ -3301,6 +3370,54 @@ svg defs { display: none; }
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+}
+
+/* Static state and accessibility helpers */
+.initially-hidden {
+  display: none;
+}
+
+.initial-width-zero {
+  width: 0;
+}
+
+.translation-tabs {
+  margin-bottom: 28px;
+}
+
+.convo-auto-speak {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.convo-auto-speak-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.convo-clear-actions {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.icon-btn-subtle {
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.quick-output-placeholder {
+  color: var(--text-muted);
+}
+
+.service-attribution {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.cp-fill-initial {
+  stroke-dashoffset: 251.2;
 }
 
 /* Responsive */

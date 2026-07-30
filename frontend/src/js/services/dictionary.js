@@ -1,5 +1,5 @@
 /**
- * dictionary.js — Dictionary Module
+ * dictionary.js — Frontend Dictionary Service
  * Supports: English (Free Dictionary API - Oxford/Cambridge style)
  *           Chinese (CC-CEDICT via Moedict API)
  */

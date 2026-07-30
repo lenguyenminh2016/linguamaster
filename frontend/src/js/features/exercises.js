@@ -1,5 +1,5 @@
 /**
- * exercises.js — All Exercise Types
+ * exercises.js — Frontend Exercise Types
  * Listening, Speaking phrases, Reading articles, Writing prompts
  */
 

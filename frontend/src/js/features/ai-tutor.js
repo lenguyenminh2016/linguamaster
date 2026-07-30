@@ -1,5 +1,5 @@
 /**
- * ai-tutor.js — AI Professor Module
+ * ai-tutor.js — Frontend AI Professor Module
  * Rule-based grammar checker + comprehensive language knowledge base
  * Handles: Chat responses, grammar correction, vocabulary teaching
  */
@@ -495,27 +495,30 @@ Hầu hết danh từ 2 âm tiết → trọng âm ở âm 1: **TA**-ble, **WIN*
 
   // ── RENDER MARKDOWN ──────────────────────────────────
   function renderMarkdown(text) {
-    return text
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
       // Headers
-      .replace(/^## (.+)$/gm, '<h3 style="font-size:15px;font-weight:700;color:var(--text-accent);margin:10px 0 6px">$1</h3>')
-      .replace(/^### (.+)$/gm, '<h4 style="font-size:13px;font-weight:700;color:var(--text-primary);margin:8px 0 4px">$1</h4>')
+      .replace(/^## (.+)$/gm, '<h3 class="md-heading-2">$1</h3>')
+      .replace(/^### (.+)$/gm, '<h4 class="md-heading-3">$1</h4>')
       // Bold
-      .replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--text-accent)">$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="md-strong">$1</strong>')
       // Italic
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       // Code inline
-      .replace(/`(.+?)`/g, '<code style="background:rgba(124,58,237,0.2);padding:1px 6px;border-radius:4px;font-family:var(--font-mono);font-size:12px">$1</code>')
+      .replace(/`(.+?)`/g, '<code class="md-code">$1</code>')
       // Blockquote
-      .replace(/^> (.+)$/gm, '<div style="border-left:3px solid var(--accent-primary);padding-left:12px;color:var(--text-secondary);margin:6px 0;font-style:italic">$1</div>')
+      .replace(/^&gt; (.+)$/gm, '<div class="md-blockquote">$1</div>')
       // Table (basic)
       .replace(/\|(.+)\|/g, (match) => {
         const cells = match.split('|').filter(c => c.trim() && !c.match(/^[-\s|]+$/));
         if (!cells.length) return match;
-        return '<span style="display:flex;gap:16px;font-family:var(--font-mono);font-size:12px">' + cells.map(c => `<span>${c.trim()}</span>`).join('') + '</span>';
+        return '<span class="md-table-row">' + cells.map(c => `<span>${c.trim()}</span>`).join('') + '</span>';
       })
       // List items
-      .replace(/^- (.+)$/gm, '<li style="margin:3px 0;padding-left:4px">$1</li>')
-      .replace(/(<li.*<\/li>)+/gs, '<ul style="padding-left:16px;margin:8px 0">$&</ul>')
+      .replace(/^- (.+)$/gm, '<li class="md-list-item">$1</li>')
+      .replace(/(<li.*<\/li>)+/gs, '<ul class="md-list">$&</ul>')
       // Newlines
       .replace(/\n\n/g, '<br><br>')
       .replace(/\n/g, '<br>');

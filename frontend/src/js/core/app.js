@@ -1,5 +1,5 @@
 /**
- * app.js — Main Application Controller
+ * app.js — Frontend Application Controller
  * Orchestrates navigation, all modules, and UI interactions
  */
 
@@ -16,6 +16,8 @@ const App = (() => {
   let isFlashcardFlipped = false;
   let isListening = false;
   let audioProgressInterval = null;
+  let tutorHistory = [];
+  let tutorRequestInFlight = false;
 
   // ── INIT ─────────────────────────────────────────
   function init() {
@@ -171,14 +173,35 @@ const App = (() => {
     });
   }
 
-  function sendMessage() {
+  async function requestTutorReply(message) {
+    const response = await fetch('/api/tutor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        history: tutorHistory,
+        language: currentLang
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || typeof data.reply !== 'string') {
+      throw new Error(data.error || `AI request failed: HTTP ${response.status}`);
+    }
+    return data.reply;
+  }
+
+  async function sendMessage() {
     const input = document.getElementById('chat-input');
     const messages = document.getElementById('chat-messages');
-    if (!input || !messages) return;
+    const sendBtn = document.getElementById('chat-send-btn');
+    if (!input || !messages || tutorRequestInFlight) return;
 
     const text = input.value.trim();
     if (!text) return;
 
+    tutorRequestInFlight = true;
+    if (sendBtn) sendBtn.disabled = true;
     input.value = '';
     input.style.height = 'auto';
 
@@ -198,22 +221,39 @@ const App = (() => {
     if (avatarStatus) avatarStatus.textContent = 'Đang suy nghĩ...';
     if (statusDot) { statusDot.classList.remove('online'); statusDot.classList.add('thinking'); }
 
-    // Generate response with delay for realism
-    setTimeout(() => {
-      removeTyping(typingId);
-      const response = AITutor.generateResponse(text, currentLang);
-      appendMessage(response.text, 'assistant', false, true);
-      Progress.recordActivity(response.xp || 5, 'speaking');
+    try {
+      const reply = await requestTutorReply(text);
+      tutorHistory.push(
+        { role: 'user', text },
+        { role: 'assistant', text: reply }
+      );
+      tutorHistory = tutorHistory.slice(-20);
 
-      if (avatarStatus) avatarStatus.textContent = 'Sẵn sàng';
-      if (statusDot) { statusDot.classList.remove('thinking'); statusDot.classList.add('online'); }
+      removeTyping(typingId);
+      appendMessage(reply, 'assistant', false, true);
+      Progress.recordActivity(10, 'speaking');
 
       // Auto-speak response if short
-      if (response.text.length < 300 && window.speechSynthesis) {
-        const plainText = response.text.replace(/[#*`>\-]/g, '').replace(/\[.*?\]/g, '').trim();
+      if (reply.length < 300 && window.speechSynthesis) {
+        const plainText = reply.replace(/[#*`>\-]/g, '').replace(/\[.*?\]/g, '').trim();
         if (plainText.length < 150) Speech.speak(plainText, currentLang);
       }
-    }, 800 + Math.random() * 700);
+    } catch (error) {
+      console.warn('Gemini unavailable, using local tutor:', error);
+      removeTyping(typingId);
+      const fallback = AITutor.generateResponse(text, currentLang);
+      appendMessage(fallback.text, 'assistant', false, true);
+      Progress.recordActivity(fallback.xp || 5, 'speaking');
+      showToast('Gemini tạm thời không khả dụng — đang dùng trợ giảng cục bộ.', 'info', 'fa-triangle-exclamation');
+    } finally {
+      tutorRequestInFlight = false;
+      if (sendBtn) sendBtn.disabled = false;
+      if (avatarStatus) avatarStatus.textContent = 'Sẵn sàng';
+      if (statusDot) {
+        statusDot.classList.remove('thinking');
+        statusDot.classList.add('online');
+      }
+    }
   }
 
   function appendMessage(text, role, checkGrammar = false, isMarkdown = false) {
@@ -246,8 +286,8 @@ const App = (() => {
         ${content}
         ${grammarHtml}
         <span class="msg-time">${time}</span>
-        ${!isUser ? `<div style="margin-top:8px;display:flex;gap:8px">
-          <button onclick="Speech.speak(this.closest('.msg-bubble').textContent, '${currentLang}')" style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:12px"><i class="fas fa-volume-high"></i></button>
+        ${!isUser ? `<div class="message-actions">
+          <button class="message-speak-button" aria-label="Đọc câu trả lời" onclick="Speech.speak(this.closest('.msg-bubble').textContent, '${currentLang}')"><i class="fas fa-volume-high"></i></button>
         </div>` : ''}
       </div>
     `;

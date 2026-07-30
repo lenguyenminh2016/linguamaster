@@ -1,5 +1,5 @@
 /**
- * translator.js — Live Translation Module
+ * translator.js — Frontend Live Translation Service
  * Modes: Meeting/Video | Conversation | Quick
  * API: MyMemory (free, no key required)
  */
